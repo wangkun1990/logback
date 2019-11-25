@@ -7,12 +7,25 @@
         </encoder>
     </appender>
 
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>/opt/tuniu/logs/tomcat/app/${tomcat_app_base}/log.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>/opt/tuniu/logs/tomcat/app/${tomcat_app_base}/login.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
+            <maxFileSize>20MB</maxFileSize>
+            <maxHistory>14</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{32} -%L - %X{traceId} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
 
     <root level="error">
         <appender-ref ref="STDOUT" />
     </root>
 
 
-    <logger level="info" name="com.redis.controller.LogController"></logger>
+    <logger level="info" name="com.redis.controller.LogController"/>
 
 </configuration>
